@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            /* Gradient background */
+            color: #ffffff;
+        }
+
+        .countdown-container {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            /* Semi-transparent overlay */
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+
+
+        }
+
+        .slogan {
+            display: flex;
+            width: 82%;
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            /* Semi-transparent overlay */
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin: 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            background: #1e1e1e;
+            /* Dark box background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 255, 255, 0.3);
+            align-items: center;
+        }
+
+        .time-box span {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+            color: #00ffcc;
+            /* Neon green */
+        }
+
+        .time-box p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .motivational {
+            font-style: italic;
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #00ffcc;
+            color: #121212;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        /* date sheer */
+        .datesheet-container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            /* Semi-transparent background */
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+    
+
+        p {
+            margin: 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .datesheet-table {
+            margin: 20px auto;
+            width: 90%;
+            max-width: 800px;
+            border-collapse: collapse;
+            background: #ffffff;
+            color: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .datesheet-table thead {
+            background: #f12711;
+            /* Table Header Background */
+            color: #fff;
+        }
+
+        .datesheet-table th,
+        .datesheet-table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+
+        }
+
+        .datesheet-table tbody tr:nth-child(odd) {
+            background: #f9f9f9;
+        }
+
+        .datesheet-table tbody tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        .note {
+            font-style: italic;
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #f1c40f;
+        }
+
+        #close {
+            cursor: pointer;
+            margin-left: 90%;
+        }
+
+        /* end  */
+
+        @media only screen and (max-width : 1200px) {
+            .countdown-container {
+                width: 320px;
+            }
+
+            .time-box {
+                width: 10%;
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="countdown-container" class="countdown-container">
+        <h1>Time Left for Boards</h1>
+        <div class="countdown">
+            <div class="time-box">
+                <span id="days">00</span>
+                <p>Days</p>
+            </div>
+            <div class="time-box">
+                <span id="hours">00</span>
+                <p>Hours</p>
+            </div>
+            <div class="time-box">
+                <span id="minutes">00</span>
+                <p>Minutes</p>
+            </div>
+            <div class="time-box">
+                <span id="seconds">00</span>
+                <p>Seconds</p>
+            </div>
+        </div>
+        <div class="buttons">
+            <button onclick="show_date_sheet()" class="btn">Date sheet</button>
+        </div>
+    </div>
+
+    <div id="slogan" class="slogan">
+        <p>This is the time to do work hard to conquer the boards !</p>
+    </div>
+  <h3>Keep studying and keep inspiring....</h3>
+    <h3 id="h3">Think, design, and—made by Shahzade!</h3>
+
+
+
+    <!-- date sheet -->
+
+    <div id="datesheet-container" class="datesheet-container">
+        <svg id="close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+        <h1>Class 10 Board Exam Date Sheet</h1>
+        <p>***Prepare well for your exams***</p>
+        <table class="datesheet-table">
+            <thead>
+                <tr>
+                    <th>Exam Date</th>
+                    <th>Subject</th>
+                    <th>subject code </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>15 Feb, 2025</td>
+                    <td>English</td>
+                    <td>184</td>
+                </tr>
+                <tr>
+                    <td>20 Feb, 2025</td>
+                    <td>Science</td>
+                    <td>086</td>
+                </tr>
+                <tr>
+                    <td>25 Feb, 2025</td>
+                    <td>Social Science</td>
+                    <td>087</td>
+                </tr>
+                <tr>
+                    <td>28 Feb, 2025</td>
+                    <td>Hindi</td>
+                    <td>085</td>
+                </tr>
+                <tr>
+                    <td>10 March, 2025</td>
+                    <td>Math</td>
+                    <td>041</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Keep studying and keep inspiring....</h3>
+        <h3>Think, design, and—made by Shahzade!</h3>
+    </div>
+
+    <!-- end -->
+
+    <script>
+        async function countdown() {
+            const futureTime = new Date('2025-02-15T00:00:00');
+            const interval = setInterval(() => {
+                const today = new Date()
+
+                let hour = 24 - today.getHours()
+                let min = 60 - today.getMinutes()
+                let second = 60 - today.getSeconds()
+                const timeDifference = futureTime - today;
+                let days = Math.floor(timeDifference / 86400000)
+                document.getElementById("days").textContent = days
+                document.getElementById("hours").textContent = hour
+                document.getElementById("minutes").textContent = min
+                document.getElementById("seconds").textContent = second;
+            }, 1000)
+
+        }
+        countdown()
+
+        function show_date_sheet() {
+            document.getElementById("countdown-container").style.display = "none"
+            document.getElementById("datesheet-container").style.display = "block"
+            document.getElementById("slogan").style.display = "none"
+            document.getElementById("h3").style.display = "none"
+        }
+        let close = document.getElementById("close")
+        close.addEventListener("click", () => {
+            document.getElementById("countdown-container").style.display = "block"
+            document.getElementById("datesheet-container").style.display = "none"
+            document.getElementById("slogan").style.display = "flex"
+            document.getElementById("h3").style.display = "block"
+
+        })
+    </script>
+</body>
+
+</html>
